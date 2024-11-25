@@ -2,7 +2,7 @@ package br.com.fiap.postech.techchallenge.phillippimentafood.pedido.application.
 
 import br.com.fiap.postech.techchallenge.phillippimentafood.pedido.domain.model.Pedido;
 
-public interface SalvarPedidoPort {
+public interface CriarPedidoPort {
 
-    Pedido salvarPedido(Pedido pedido);
+    Pedido criarPedido(Pedido pedido);
 }

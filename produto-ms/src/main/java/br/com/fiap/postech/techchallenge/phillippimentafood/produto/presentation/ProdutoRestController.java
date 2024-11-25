@@ -1,6 +1,6 @@
 package br.com.fiap.postech.techchallenge.phillippimentafood.produto.presentation;
 
-import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.service.ProdutosPorCategoriaPorIdExternoService;
+import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.service.ProdutoService;
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.domain.model.Categoria;
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.domain.model.Produto;
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.presentation.dto.AtualizarProdutoRequest;
@@ -27,12 +27,12 @@ import java.util.UUID;
 
 @Tag(name = "Produtos Controller", description = "Operações relacionadas a produtos")
 @RestController
-@RequestMapping
+@RequestMapping("/produtos")
 public class ProdutoRestController {
 
-    private final ProdutosPorCategoriaPorIdExternoService produtoService;
+    private final ProdutoService produtoService;
 
-    public ProdutoRestController(ProdutosPorCategoriaPorIdExternoService produtoService) {
+    public ProdutoRestController(ProdutoService produtoService) {
         this.produtoService = produtoService;
     }
 
@@ -42,7 +42,7 @@ public class ProdutoRestController {
     public ResponseEntity<ProdutoResponse> criarProduto(@Valid @RequestBody CadastrarProdutoRequest request) {
         Produto produto = CadastrarProdutoRequest.toModel(request);
         ProdutoResponse produtoResponse = ProdutoResponse
-                .fromModel(this.produtoService.criarProduto(produto));
+                .fromModel(this.produtoService.cadastrarProduto(produto));
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoResponse);
     }
 

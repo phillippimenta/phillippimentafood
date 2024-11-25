@@ -1,7 +1,7 @@
 package br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.service;
 
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.port.inbound.AtualizarProdutoPort;
-import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.port.inbound.CriarProdutoPort;
+import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.port.inbound.CadastrarProdutoPort;
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.port.inbound.ExcluirProdutoPorIdExternoPort;
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.port.inbound.ListarProdutosPorCategoriaPort;
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.application.port.inbound.ObterProdutoPorIdExternoPort;
@@ -14,17 +14,17 @@ import br.com.fiap.postech.techchallenge.phillippimentafood.produto.domain.model
 import java.util.List;
 import java.util.UUID;
 
-public class ProdutosPorCategoriaPorIdExternoService implements CriarProdutoPort, AtualizarProdutoPort,
+public class ProdutoService implements CadastrarProdutoPort, AtualizarProdutoPort,
         ListarProdutosPorCategoriaPort, ExcluirProdutoPorIdExternoPort, ObterProdutoPorIdExternoPort {
 
     private final ProdutoRepositoryPort produtoRepositoryPort;
 
-    public ProdutosPorCategoriaPorIdExternoService(ProdutoRepositoryPort produtoRepositoryPort) {
+    public ProdutoService(ProdutoRepositoryPort produtoRepositoryPort) {
         this.produtoRepositoryPort = produtoRepositoryPort;
     }
 
     @Override
-    public Produto criarProduto(Produto produto) {
+    public Produto cadastrarProduto(Produto produto) {
         Produto produtoPesquisado = this.produtoRepositoryPort.pesquisarPorNome(produto.getNome());
         if (produtoPesquisado != null) {
             throw new ProdutoJaCadastradoException(produtoPesquisado);

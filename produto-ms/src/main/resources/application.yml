@@ -3,9 +3,6 @@ server:
 spring:
   application:
     name: produto-ms
-  mvc:
-    servlet:
-      path: /api/produtos
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/produto-ms

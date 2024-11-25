@@ -27,7 +27,7 @@ public class ClienteServiceTest {
     @Mock
     private ClienteJpaRepository clienteJpaRepository;
     private ClienteEntityMapper clienteEntityMapper;
-    AutoCloseable mock;
+    private AutoCloseable mock;
 
     @BeforeEach
     void setup() {
@@ -44,9 +44,10 @@ public class ClienteServiceTest {
     @Test
     public void deveCadastrarCliente_QuandoDadosSaoValidos() {
         // Arrange
+        String nome = "Ulysses Guimarães";
         CPF cpf = new CPF("826.492.800-50");
         Email email = new Email("ulyssesguimaraes@mailinator.com");
-        Cliente cliente = new Cliente(cpf, "Ulysses Guimarães", email);
+        Cliente cliente = new Cliente(cpf, nome, email);
         ClienteEntity clienteEntity = this.clienteEntityMapper.fromDomain(cliente);
         clienteEntity.setId(1L);
         when(this.clienteJpaRepository.obterPorCpf(any(String.class))).thenReturn(null);
@@ -55,13 +56,12 @@ public class ClienteServiceTest {
         Cliente clienteRegistrado = this.clienteService.cadastrarCliente(cliente);
         // Assert
         verify(this.clienteJpaRepository, times(1)).save(any());
-        assertThat(cliente.getIdExterno()).isEqualTo(clienteRegistrado.getIdExterno());
-        assertThat(cliente.getCpf()).isEqualTo(clienteRegistrado.getCpf());
-        assertThat(cliente.getNome()).isEqualTo(clienteRegistrado.getNome());
-        assertThat(cliente.getEmail()).isEqualTo(clienteRegistrado.getEmail());
         assertThat(clienteRegistrado)
                 .isInstanceOf(Cliente.class)
                 .isNotNull();
+        assertThat(clienteRegistrado.getCpf()).isEqualTo(cpf);
+        assertThat(clienteRegistrado.getNome()).isEqualTo(nome);
+        assertThat(clienteRegistrado.getEmail()).isEqualTo(email);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ClienteServiceTest {
         clienteEntity.setId(1L);
         when(this.clienteJpaRepository.obterPorCpf(any(String.class))).thenReturn(clienteEntity);
         String mensagem = String.format("Cliente com CPF %s já cadastrado.", cpf.getNumeroFormatado());
-        // Assert
+        // Act and Assert
         assertThatThrownBy(() -> this.clienteService.cadastrarCliente(cliente))
                 .isInstanceOf(CPFClienteJaCadastradoException.class)
                 .hasMessage(mensagem);

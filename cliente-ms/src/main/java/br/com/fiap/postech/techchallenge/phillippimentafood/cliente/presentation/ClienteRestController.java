@@ -52,7 +52,7 @@ public class ClienteRestController {
 
     @Operation(summary = "Permite consultar uma lista paginada de clientes com filtros opcionais por cpf, nome ou e-mail.",
             description = "Retorna uma lista paginada de clientes, se encontrados, incluindo as informações de id_externo, cpf, nome, email, numeroPagina, tamanhoPagina, totalElementos e totalPaginas.")
-    @ApiResponse(responseCode = "200", description = "Lista paginada de ordens de produção retornada com sucesso, caso existam ordens correspondentes.")
+    @ApiResponse(responseCode = "200", description = "Lista paginada de clientes retornada com sucesso, caso haja clientes correspondentes.")
     @GetMapping
     public ResponseEntity<PaginaResposta<ClienteResponse>> buscarClienteFiltroPaginado(
             @RequestParam(required = false) String cpf,

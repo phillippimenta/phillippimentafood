@@ -52,7 +52,7 @@ public class PedidoRestController {
     @PostMapping
     public ResponseEntity<PedidoResponse> cadastrarCliente(@Valid @RequestBody NovoPedidoRequest request) {
         Pedido pedido = NovoPedidoRequest.toModel(request);
-        PedidoResponse pedidoResponse = PedidoResponse.fromModel(this.pedidoService.salvarPedido(pedido));
+        PedidoResponse pedidoResponse = PedidoResponse.fromModel(this.pedidoService.criarPedido(pedido));
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoResponse);
     }
 }

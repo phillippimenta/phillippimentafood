@@ -44,8 +44,7 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
     @Override
     public Produto salvar(Produto produto) {
         ProdutoEntity entity = this.produtoEntityMapper.fromDomain(produto);
-        this.produtoJpaRepository.save(entity);
-        return this.produtoEntityMapper.toDomain(this.produtoJpaRepository.findByIdExterno(entity.getIdExterno()));
+        return this.produtoEntityMapper.toDomain(this.produtoJpaRepository.save(entity));
     }
 
     @Override

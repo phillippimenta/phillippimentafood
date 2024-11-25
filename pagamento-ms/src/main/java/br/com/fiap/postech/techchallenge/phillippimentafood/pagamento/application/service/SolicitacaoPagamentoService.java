@@ -5,7 +5,6 @@ import br.com.fiap.postech.techchallenge.phillippimentafood.pagamento.applicatio
 import br.com.fiap.postech.techchallenge.phillippimentafood.pagamento.domain.model.Pagamento;
 import br.com.fiap.postech.techchallenge.phillippimentafood.pagamento.domain.model.Status;
 import com.mercadopago.MercadoPagoConfig;
-import com.mercadopago.client.MercadoPagoClient;
 import com.mercadopago.client.payment.PaymentClient;
 
 public class SolicitacaoPagamentoService implements CriarSolicitacaoPagamentoPort {

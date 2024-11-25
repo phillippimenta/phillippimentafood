@@ -2,7 +2,7 @@ package br.com.fiap.postech.techchallenge.phillippimentafood.produto.application
 
 import br.com.fiap.postech.techchallenge.phillippimentafood.produto.domain.model.Produto;
 
-public interface CriarProdutoPort {
+public interface CadastrarProdutoPort {
 
-    Produto criarProduto(Produto produto);
+    Produto cadastrarProduto(Produto produto);
 }
